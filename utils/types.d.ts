@@ -23,6 +23,12 @@ interface features{
     imageUrl:string
 }
 
+export interface featuredHotel{
+    id:number,
+    name:string,
+    hotels:Array<Hotels>
+}
+
 export interface DetailHotel extends Hotels{
     
 }

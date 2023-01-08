@@ -1,15 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 import HotelItem from "../components/HotelItem";
 
 import Banner from "../assets/images/banner.png";
-import ImgMostPick from "../assets/images/mostpicked-1.jpg";
-import ImgMostPick2 from "../assets/images/mostpicked-2.jpg";
 import { ICtraveler, ICtreasure, ICcity } from "../assets/icons";
-import { Hotels } from "../utils/types";
+import { Hotels, featuredHotel } from "../utils/types";
 
 type IProps = {
   hotelLists: {
-    hotels: Hotels[];
+    featured: featuredHotel[];
     mostPickHotels: Hotels[];
   };
 };
@@ -70,6 +69,9 @@ export default function Home({ hotelLists }: IProps) {
       {/* end banner  */}
       {/* start Section highlight products */}
       <div className="mt-12">
+        <div className="text-2xl text-Nblue-500 font-medium pb-2">
+          Most Picked
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="hidden lg:block">
             <HotelItem data={hotelLists?.mostPickHotels[0]} />
@@ -81,6 +83,36 @@ export default function Home({ hotelLists }: IProps) {
           </div>
         </div>
       </div>
+      {/* featured hotels */}
+      {hotelLists?.featured.map((item, index) => (
+        <div className="mt-12" key={index}>
+          <div className="flex justify-between items-center">
+            <div className="text-lg text-Nblue-500 font-medium pb-2">
+              {item.name}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {item.hotels?.map((item, index) => (
+              <Link
+                href={`/hotel-detail/${item.id}`}
+                className="relative flex flex-col"
+                key={index}
+              >
+                <div className="absolute right-0 bg-Npink-500 p-2 text-xs rounded-md text-white font-light">
+                  Popular Choice
+                </div>
+                <Image
+                  src={item.imageUrl}
+                  alt={item.name}
+                  className="rounded-lg h-[150px] object-cover"
+                />
+                <div className="text-blue-800 font-medium">{item.name}</div>
+                <div className="text-gray-400 text-sm">{`${item.country}, ${item.city}`}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      ))}
     </>
   );
 }
