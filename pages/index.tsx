@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HotelItem from "../components/HotelItem";
+import axios from "axios";
 
 import Banner from "../assets/images/banner.png";
 import { ICtraveler, ICtreasure, ICcity } from "../assets/icons";
@@ -117,11 +118,10 @@ export default function Home({ hotelLists }: IProps) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/hotels");
-  const response = await res.json();
+export async function getServerSideProps() {
+  const response = await axios.get("http://localhost:3000/api/hotels");
 
   return {
-    props: { hotelLists: response },
+    props: { hotelLists: response.data },
   };
 }
