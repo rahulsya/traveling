@@ -14,7 +14,7 @@ function Layout({ children }: Props) {
         <title>Staycation.</title>
       </Head>
       <Navbar />
-      <div className="container mx-auto px-4 lg:px-32 min-h-screen mt-12 mb-32">
+      <div className="container w-full lg:mx-auto px-4 lg:px-32 min-h-screen mt-12 mb-32">
         {children}
       </div>
       <Footer />
