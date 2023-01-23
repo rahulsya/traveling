@@ -4,6 +4,8 @@ import "react-date-range/dist/theme/default.css";
 import { DateRange, RangeKeyDict } from "react-date-range";
 import moment from "moment";
 
+import { useRouter } from "next/router";
+
 type Bookdetails = {
   price: number;
   start_date: Date | undefined;
@@ -12,6 +14,8 @@ type Bookdetails = {
 };
 
 function BookingFormDate() {
+  const router = useRouter();
+
   const [bookDetail, setbookDetail] = useState<Bookdetails>({
     price: 100,
     start_date: new Date(),
@@ -59,6 +63,10 @@ function BookingFormDate() {
     }
   }, []);
 
+  const handleBook = () => {
+    router.push("/order/checkout");
+  };
+
   return (
     <div className="flex flex-col">
       <div className="pb-4">Start Booking</div>
@@ -104,6 +112,12 @@ function BookingFormDate() {
           />
         )}
       </div>
+      <button
+        className="px-4 bg-Nblue-400 text-white py-4 rounded-md text-lg"
+        onClick={handleBook}
+      >
+        Book
+      </button>
     </div>
   );
 }
