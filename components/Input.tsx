@@ -2,7 +2,7 @@ import React from "react";
 
 type IProps = {
   title: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 };
 
