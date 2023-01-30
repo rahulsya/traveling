@@ -5,8 +5,8 @@ type IProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   type?: string | "text";
-  name: string;
-  value: string;
+  name?: string;
+  value?: string;
 };
 
 function Input({ title, onChange, placeholder, type, name, value }: IProps) {
