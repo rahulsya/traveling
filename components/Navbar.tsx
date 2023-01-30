@@ -1,11 +1,15 @@
 import React from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 type IProps = {
   to: string;
   title: string;
 };
 export default function Navbar() {
+  const { data } = useSession();
+  console.log(data);
+
   const links: IProps[] = [
     {
       to: "/",
@@ -25,6 +29,23 @@ export default function Navbar() {
     },
   ];
 
+  const LoginStatus = () => {
+    if (data) {
+      return (
+        <>
+          <button onClick={() => signOut()} className="text-Nblue-500">
+            Sign Out
+          </button>
+        </>
+      );
+    }
+    return (
+      <button onClick={() => signIn()} className="text-Nblue-500">
+        Login
+      </button>
+    );
+  };
+
   return (
     <div className="shadow-sm">
       <div className="container mx-auto px-3 lg:px-32 items-center flex justify-between py-5">
@@ -43,6 +64,7 @@ export default function Navbar() {
               {link.title}
             </Link>
           ))}
+          <LoginStatus />
         </div>
       </div>
     </div>

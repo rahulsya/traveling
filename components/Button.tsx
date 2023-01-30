@@ -1,7 +1,7 @@
 import React from "react";
 
 type IProps = {
-  onClick: () => void;
+  onClick?: () => void;
   title: string;
   styles?: string;
 };
