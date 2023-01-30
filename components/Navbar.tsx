@@ -8,7 +8,6 @@ type IProps = {
 };
 export default function Navbar() {
   const { data } = useSession();
-  console.log(data);
 
   const links: IProps[] = [
     {
