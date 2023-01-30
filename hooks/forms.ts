@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 type formType = {
-  initialValue: {};
-  validate: {};
+  initialValue: {
+    [key: string]: string;
+  };
+  validate?: {};
 };
 
 function useForm({ initialValue, validate }: formType) {
