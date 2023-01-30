@@ -10,16 +10,23 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch(`http://localhost:3001/auth/login`, {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
-        const user = await res.json();
-        if (user) {
-          return user;
+        try {
+          const res = await fetch(`${process.env.NEXT_APP_APIURL}/auth/login`, {
+            method: "POST",
+            body: JSON.stringify(credentials),
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = await res.json();
+          if (data.user) {
+            return {
+              ...data.user,
+              name: data.user.username,
+            };
+          }
+          return null;
+        } catch (error) {
+          console.log("err", error);
         }
-        return null;
       },
     }),
   ],
@@ -54,7 +61,6 @@ export const authOptions = {
   },
   pages: {
     signIn: "/auth/signin",
-    signOut: "/auth/signout",
     error: "/auth/error",
     newUser: "/auth/new-user",
   },

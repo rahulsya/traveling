@@ -18,7 +18,7 @@ function Input({ title, onChange, placeholder, type, name, value }: IProps) {
         name={name}
         className="w-[420px] py-3 px-4 rounded-md bg-gray-200 placeholder:text-gray-500"
         type={type}
-        id=""
+        id={name}
         value={value}
         placeholder={placeholder}
       />
